@@ -1,5 +1,5 @@
 {% set name = "zizmor" %}
-{% set version = "1.3.1" %}
+{% set version = "1.4.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/zizmor-{{ version }}.tar.gz
-  sha256: e3742f9000c9d9474312bc7f2e62249d7970cf45df7a9bb51c6991f0e69ada08
+  sha256: 6f08181ec2ea8f3d9625e3fa9441b06f3d2c123e6885cc3a32a5c0843726da48
 
 build:
   number: 0
