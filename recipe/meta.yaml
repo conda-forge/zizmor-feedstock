@@ -1,5 +1,5 @@
 {% set name = "zizmor" %}
-{% set version = "1.5.1" %}
+{% set version = "1.5.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,13 +7,14 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/zizmor-{{ version }}.tar.gz
-  sha256: a21e9ed724c2048fd7edd6ec70eb89059c314e7ebbb121dc1898c01ad7a7d2ac
+  sha256: 848f04c0d84b085dfb79c66951404372ebf9b3dd0c73076f1baac83db29e74e4
 
 build:
   number: 0
   script:
     - export CARGO_PROFILE_RELEASE_STRIP=symbols  # [not win]
-    - export RUSTFLAGS="$CARGO_BUILD_RUSTFLAGS"   # [not win]
+    - export RUSTFLAGS="$CARGO_BUILD_RUSTFLAGS"  # [not win]
+    - export CFLAGS="$CFLAGS -D_BSD_SOURCE"  # [linux]
     - set CARGO_PROFILE_RELEASE_STRIP=symbols  # [win]
     - {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
     - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
