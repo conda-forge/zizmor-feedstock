@@ -1,13 +1,13 @@
 {% set name = "zizmor" %}
-{% set version = "1.7.0" %}
+{% set version = "1.9.0" %}
 
 package:
   name: {{ name|lower }}
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/zizmor-{{ version }}.tar.gz
-  sha256: 4f987f4b81ef740863db629391c55d1e7ad75723fc30325dfde63ab36537d6b0
+  url: https://github.com/zizmorcore/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 27da51a31dfb553a9fe0acfa3a129f0d5e55b8593c502f2c99b332e5f3156e0e
 
 build:
   number: 0
@@ -43,7 +43,7 @@ test:
     - pip
 
 about:
-  home: https://github.com/woodruffw/zizmor
+  home: https://docs.zizmor.sh
   summary: Static analysis for GitHub Actions
   license: MIT
   license_file:
