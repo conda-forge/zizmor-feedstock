@@ -6,8 +6,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/zizmor-{{ version }}.tar.gz
-  sha256: 3a8486da8e6e75edd1cf56227d64b3b18968f7d65576bb2e268f60d496a1cf52
+  url: https://github.com/zizmorcore/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
+  sha256: 27da51a31dfb553a9fe0acfa3a129f0d5e55b8593c502f2c99b332e5f3156e0e
 
 build:
   number: 0
@@ -43,7 +43,7 @@ test:
     - pip
 
 about:
-  home: https://github.com/woodruffw/zizmor
+  home: https://docs.zizmor.sh
   summary: Static analysis for GitHub Actions
   license: MIT
   license_file:
