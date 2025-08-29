@@ -10,7 +10,7 @@ source:
   sha256: 1caa4b9884d7755cd5679f629ecbfe7d028cbb508fae9ed423129b48f7f3dbaf
 
 build:
-  number: 0
+  number: 1
   script:
     - export CARGO_PROFILE_RELEASE_STRIP=symbols  # [not win]
     - export RUSTFLAGS="$CARGO_BUILD_RUSTFLAGS"  # [not win]
