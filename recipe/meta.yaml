@@ -1,5 +1,5 @@
 {% set name = "zizmor" %}
-{% set version = "1.14.1" %}
+{% set version = "1.15.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/zizmorcore/{{ name }}/archive/refs/tags/v{{ version }}.tar.gz
-  sha256: 22dbee4241ed0ba4b05a664770efa1b900499f536bf5b852c2ec8c2902b77fb8
+  sha256: 98a4d8bca8f73a569cf1621042b09d1f48b5a2962e47c570c0f4b3138671e5db
 
 build:
   number: 0
