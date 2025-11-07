@@ -31,11 +31,12 @@ requirements:
     - if: build_platform != target_platform
       then:
         - python
-        - cross-python_{{ target_platform }}
+        - cross-python_${{ target_platform }}
         - maturin >=1.0,<2.0
     - ${{ compiler('c') }}
     - ${{ stdlib("c") }}
     - ${{ compiler('rust') }}
+    - make
     - cargo-bundle-licenses
   host:
     - python
