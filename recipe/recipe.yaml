@@ -17,6 +17,12 @@ build:
       CARGO_PROFILE_RELEASE_STRIP: symbols
       CARGO_PROFILE_RELEASE_LTO: fat
     content:
+      - if: not win
+        then:
+          - export RUSTFLAGS="$CARGO_BUILD_RUSTFLAGS"
+      - if: linux
+        then:
+          - export CFLAGS="$CFLAGS -D_BSD_SOURCE"
       - if: unix
         then:
           - cargo auditable install --locked --no-track --bins --root ${{ PREFIX }} --path crates/zizmor
