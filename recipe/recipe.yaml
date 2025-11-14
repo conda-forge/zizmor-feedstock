@@ -11,7 +11,7 @@ source:
   sha256: 0953b0bd6016b929a743b18e693b9cf8e0f2766e53531a64134f6d762965e933
 
 build:
-  number: 0
+  number: 1
   script:
     env:
       CARGO_PROFILE_RELEASE_STRIP: symbols
@@ -23,38 +23,29 @@ build:
       - if: linux
         then:
           - export CFLAGS="$CFLAGS -D_BSD_SOURCE"
-      - ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+      - if: unix
+        then:
+          - cargo auditable install --locked --no-track --bins --root ${{ PREFIX }} --path crates/zizmor
+        else:
+          - cargo auditable install --locked --no-track --bins --root %LIBRARY_PREFIX% --path crates\zizmor
       - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 
 requirements:
   build:
-    - if: build_platform != target_platform
-      then:
-        - python
-        - cross-python_${{ target_platform }}
-        - maturin >=1.0,<2.0
     - ${{ compiler('c') }}
     - ${{ stdlib("c") }}
     - ${{ compiler('rust') }}
     - make
     - cargo-bundle-licenses
-  host:
-    - python
-    - maturin >=1.0,<2.0
-    - pip
-  run:
-    - python
+    - cargo-auditable
 
 tests:
   - script:
       - zizmor --help
-      - pip check
-    requirements:
-      run:
-        - pip
 
 about:
   homepage: https://docs.zizmor.sh
+  repository: https://github.com/zizmorcore/zizmor
   summary: Static analysis for GitHub Actions
   license: MIT
   license_file:
