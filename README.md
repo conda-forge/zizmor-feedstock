@@ -196,6 +196,3 @@ Feedstock Maintainers
 * [@ocefpaf](https://github.com/ocefpaf/)
 * [@ytausch](https://github.com/ytausch/)
 
-
-<!-- dummy commit to enable rerendering -->
-
