@@ -1,17 +1,16 @@
 context:
   version: "1.28.0"
-  name: zizmor
 
 package:
-  name: ${{ name }}
+  name: zizmor
   version: ${{ version }}
 
 source:
-  url: https://github.com/zizmorcore/${{ name }}/archive/refs/tags/v${{ version }}.tar.gz
+  url: https://github.com/zizmorcore/zizmor/archive/refs/tags/v${{ version }}.tar.gz
   sha256: 4676ba66c4cb8366a19d4d36139edf95fca0cd3c22ea7a8a21614040e93a3808
 
 build:
-  number: 0
+  number: 1
   script:
     env:
       CARGO_PROFILE_RELEASE_STRIP: symbols
@@ -28,6 +27,12 @@ build:
           - cargo auditable install --locked --no-track --bins --root ${{ PREFIX }} --path crates/zizmor
         else:
           - cargo auditable install --locked --no-track --bins --root %LIBRARY_PREFIX% --path crates\zizmor
+      - if: unix
+        then:
+          - mkdir -p $PREFIX/share/zsh/site-functions $PREFIX/share/bash-completion/completions $PREFIX/share/fish/vendor_completions.d
+          - zizmor --completion=zsh > $PREFIX/share/zsh/site-functions/_zizmor
+          - zizmor --completion=bash > $PREFIX/share/bash-completion/completions/zizmor
+          - zizmor --completion=fish > $PREFIX/share/fish/vendor_completions.d/zizmor.fish
       - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 
 requirements:
@@ -42,6 +47,16 @@ requirements:
 tests:
   - script:
       - zizmor --help
+  - package_contents:
+      bin:
+        - zizmor
+      files:
+        - if: unix
+          then:
+            - share/bash-completion/completions/zizmor
+            - share/fish/vendor_completions.d/zizmor.fish
+            - share/zsh/site-functions/_zizmor
+      strict: true
 
 about:
   homepage: https://docs.zizmor.sh
