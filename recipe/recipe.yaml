@@ -1,5 +1,5 @@
 context:
-  version: "1.28.0"
+  version: "1.29.0"
 
 package:
   name: zizmor
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/zizmorcore/zizmor/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: 4676ba66c4cb8366a19d4d36139edf95fca0cd3c22ea7a8a21614040e93a3808
+  sha256: de3da74599a1e080361e97c0431bdc0f656ea530420fdff953a8e3d679e1153b
 
 build:
-  number: 1
+  number: 0
   script:
     env:
       # Use cmake to build aws-lc-sys, because conda's CFLAGS inject -O2 which
@@ -28,14 +28,12 @@ build:
       - if: unix
         then:
           - cargo auditable install --locked --no-track --bins --root ${{ PREFIX }} --path crates/zizmor
-        else:
-          - cargo auditable install --locked --no-track --bins --root %LIBRARY_PREFIX% --path crates\zizmor
-      - if: unix
-        then:
           - mkdir -p $PREFIX/share/zsh/site-functions $PREFIX/share/bash-completion/completions $PREFIX/share/fish/vendor_completions.d
           - zizmor --completions=zsh > $PREFIX/share/zsh/site-functions/_zizmor
           - zizmor --completions=bash > $PREFIX/share/bash-completion/completions/zizmor
           - zizmor --completions=fish > $PREFIX/share/fish/vendor_completions.d/zizmor.fish
+        else:
+          - cargo auditable install --locked --no-track --bins --root %LIBRARY_PREFIX% --path crates\zizmor
       - cargo-bundle-licenses --format yaml --output THIRDPARTY.yml
 
 requirements:
