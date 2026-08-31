@@ -1,5 +1,5 @@
 context:
-  version: "1.29.0"
+  version: "1.30.0"
 
 package:
   name: zizmor
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/zizmorcore/zizmor/archive/refs/tags/v${{ version }}.tar.gz
-  sha256: de3da74599a1e080361e97c0431bdc0f656ea530420fdff953a8e3d679e1153b
+  sha256: 7398a8a4895a7051d6654e1ee7aa6d680a69da5174aba69bf45b73d767329166
 
 build:
   number: 0
